@@ -13,13 +13,27 @@ public class Sala {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo")
-    private TipoSala tipoSala;
+    private TipoSala tipoSala;   // este es el único campo de tipo TipoSala
 
     // getters & setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public TipoSala getTipoSala() { return tipoSala; }
-    public void setTipoSala(TipoSala tipoSala) { this.tipoSala = tipoSala; }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public TipoSala getTipoSala() {
+        return tipoSala;
+    }
+    public void setTipoSala(TipoSala tipoSala) {
+        this.tipoSala = tipoSala;
+    }
 }
