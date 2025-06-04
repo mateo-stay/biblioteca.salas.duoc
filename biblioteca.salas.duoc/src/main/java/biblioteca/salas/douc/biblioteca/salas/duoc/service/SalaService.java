@@ -16,22 +16,18 @@ public class SalaService {
         this.salaRepo = salaRepo;
     }
 
-    /** Devuelve todas las salas */
     public List<Sala> findAll() {
         return salaRepo.findAll();
     }
 
-    /** Busca una sala por ID */
     public Optional<Sala> findById(Integer id) {
         return salaRepo.findById(id);
     }
 
-    /** Inserta o actualiza una sala */
     public Sala save(Sala sala) {
         return salaRepo.save(sala);
     }
 
-    /** Elimina una sala por ID */
     public void deleteById(Integer id) {
         salaRepo.deleteById(id);
     }

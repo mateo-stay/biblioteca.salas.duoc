@@ -16,22 +16,18 @@ public class TipoSalaService {
         this.tipoSalaRepo = tipoSalaRepo;
     }
 
-    /** Devuelve todos los tipos de sala */
     public List<TipoSala> findAll() {
         return tipoSalaRepo.findAll();
     }
 
-    /** Busca un tipo de sala por ID */
     public Optional<TipoSala> findById(Integer id) {
         return tipoSalaRepo.findById(id);
     }
 
-    /** Inserta o actualiza un tipo de sala */
     public TipoSala save(TipoSala tipoSala) {
         return tipoSalaRepo.save(tipoSala);
     }
 
-    /** Elimina un tipo de sala por ID */
     public void deleteById(Integer id) {
         tipoSalaRepo.deleteById(id);
     }
