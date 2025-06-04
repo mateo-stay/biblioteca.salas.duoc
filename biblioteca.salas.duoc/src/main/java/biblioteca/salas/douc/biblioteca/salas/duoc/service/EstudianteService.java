@@ -10,25 +10,29 @@ import java.util.Optional;
 @Service
 public class EstudianteService {
 
-    private final EstudianteRepository estudianteRepository;
+    private final EstudianteRepository estudianteRepo;
 
-    public EstudianteService(EstudianteRepository estudianteRepository) {
-        this.estudianteRepository = estudianteRepository;
+    public EstudianteService(EstudianteRepository estudianteRepo) {
+        this.estudianteRepo = estudianteRepo;
     }
 
+    /** Devuelve todos los estudiantes */
     public List<Estudiante> findAll() {
-        return estudianteRepository.findAll();
+        return estudianteRepo.findAll();
     }
 
-    public Estudiante save(Estudiante estudiante) {
-        return estudianteRepository.save(estudiante);
-    }
-
+    /** Busca un estudiante por ID */
     public Optional<Estudiante> findById(Integer id) {
-        return estudianteRepository.findById(id);
+        return estudianteRepo.findById(id);
     }
 
+    /** Inserta o actualiza un estudiante */
+    public Estudiante save(Estudiante estudiante) {
+        return estudianteRepo.save(estudiante);
+    }
+
+    /** Elimina un estudiante por ID */
     public void deleteById(Integer id) {
-        estudianteRepository.deleteById(id);
+        estudianteRepo.deleteById(id);
     }
 }

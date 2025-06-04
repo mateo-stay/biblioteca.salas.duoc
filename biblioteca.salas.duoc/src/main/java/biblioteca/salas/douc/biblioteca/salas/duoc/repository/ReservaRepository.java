@@ -1,7 +1,10 @@
-
 package biblioteca.salas.douc.biblioteca.salas.duoc.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import biblioteca.salas.douc.biblioteca.salas.duoc.model.Reserva;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ReservaRepository extends JpaRepository<Reserva, Integer> {}
+@Repository
+public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
+    // findAll(), findById(Integer), save(), deleteById(Integer) ya están incluidos
+}
