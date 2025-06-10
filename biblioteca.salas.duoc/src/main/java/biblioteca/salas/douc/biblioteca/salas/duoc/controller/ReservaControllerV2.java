@@ -101,4 +101,74 @@ public class ReservaControllerV2 {
             linkTo(methodOn(ReservaControllerV2.class).findAll()).withRel("reservas")
         );
     }
+
+    @GetMapping("/student/{stuId}/fecha/{fecha}")
+    public CollectionModel<EntityModel<Reserva>> findByStudentAndFecha(
+        @PathVariable Integer stuId,
+        @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha
+    ) {
+        Date d = Date.valueOf(fecha);
+        List<EntityModel<Reserva>> coll = service.findByEstudianteIdAndFechaSolicitada(stuId, d).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+        return CollectionModel.of(coll,
+            linkTo(methodOn(ReservaControllerV2.class).findByStudentAndFecha(stuId, fecha)).withSelfRel());
+    }
+
+    @GetMapping("/sala/{salaId}/estado/{estado}")
+    public CollectionModel<EntityModel<Reserva>> findBySalaAndEstado(
+        @PathVariable Integer salaId,
+        @PathVariable Integer estado
+    ) {
+        List<EntityModel<Reserva>> coll = service.findBySalaIdAndEstado(salaId, estado).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+        return CollectionModel.of(coll,
+            linkTo(methodOn(ReservaControllerV2.class).findBySalaAndEstado(salaId, estado)).withSelfRel());
+    }
+
+    @GetMapping("/student/{stuId}/rango")
+    public CollectionModel<EntityModel<Reserva>> findByStudentBetween(
+        @PathVariable Integer stuId,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate desde,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta
+    ) {
+        Date d1 = Date.valueOf(desde);
+        Date d2 = Date.valueOf(hasta);
+        List<EntityModel<Reserva>> coll = service.findByEstudianteIdAndFechaSolicitadaBetween(stuId, d1, d2).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+        return CollectionModel.of(coll,
+            linkTo(methodOn(ReservaControllerV2.class).findByStudentBetween(stuId, desde, hasta)).withSelfRel());
+    }
+
+    @GetMapping("/sala/{salaId}/rango")
+    public CollectionModel<EntityModel<Reserva>> findBySalaBetween(
+        @PathVariable Integer salaId,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate desde,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta
+    ) {
+        Date d1 = Date.valueOf(desde);
+        Date d2 = Date.valueOf(hasta);
+        List<EntityModel<Reserva>> coll = service.findBySalaIdAndFechaSolicitadaBetween(salaId, d1, d2).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+        return CollectionModel.of(coll,
+            linkTo(methodOn(ReservaControllerV2.class).findBySalaBetween(salaId, desde, hasta)).withSelfRel());
+    }
+
+    @GetMapping("/total/sala/{salaId}")
+    public EntityModel<Map<String, Object>> totalBySala(
+        @PathVariable Integer salaId
+    ) {
+        long total = service.countBySalaId(salaId);
+        Map<String, Object> body = Map.of(
+            "salaId", salaId,
+            "totalReservations", total
+        );
+        return EntityModel.of(body,
+            linkTo(methodOn(ReservaControllerV2.class).totalBySala(salaId)).withSelfRel(),
+            linkTo(methodOn(ReservaControllerV2.class).findAll()).withRel("reservas")
+        );
+    }
 }

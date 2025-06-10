@@ -19,4 +19,14 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
     List<Reserva> findByFechaSolicitadaBetween(Date inicio, Date fin);
 
     long countByEstudianteId(Integer estudianteId);
+
+    List<Reserva> findByEstudianteIdAndFechaSolicitada(Integer estudianteId, Date fecha);
+
+    List<Reserva> findBySalaIdAndEstado(Integer salaId, Integer estado);
+
+    List<Reserva> findByEstudianteIdAndFechaSolicitadaBetween(Integer estudianteId, Date inicio, Date fin);
+
+    List<Reserva> findBySalaIdAndFechaSolicitadaBetween(Integer salaId, Date inicio, Date fin);
+
+    long countBySalaId(Integer salaId);
 }

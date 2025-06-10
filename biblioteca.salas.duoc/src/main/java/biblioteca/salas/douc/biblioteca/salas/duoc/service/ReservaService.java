@@ -52,4 +52,24 @@ public class ReservaService {
     public long countByEstudianteId(Integer estudianteId) {
         return repo.countByEstudianteId(estudianteId);
     }
+
+        public List<Reserva> findByEstudianteIdAndFechaSolicitada(Integer estudianteId, Date fecha) {
+        return repo.findByEstudianteIdAndFechaSolicitada(estudianteId, fecha);
+    }
+
+    public List<Reserva> findBySalaIdAndEstado(Integer salaId, Integer estado) {
+        return repo.findBySalaIdAndEstado(salaId, estado);
+    }
+
+    public List<Reserva> findByEstudianteIdAndFechaSolicitadaBetween(Integer estudianteId, Date inicio, Date fin) {
+        return repo.findByEstudianteIdAndFechaSolicitadaBetween(estudianteId, inicio, fin);
+    }
+
+    public List<Reserva> findBySalaIdAndFechaSolicitadaBetween(Integer salaId, Date inicio, Date fin) {
+        return repo.findBySalaIdAndFechaSolicitadaBetween(salaId, inicio, fin);
+    }
+
+    public long countBySalaId(Integer salaId) {
+        return repo.countBySalaId(salaId);
+    }
 }
